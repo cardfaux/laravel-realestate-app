@@ -1,5 +1,7 @@
 @extends('layouts.main')
 
+@section('page-title', 'Smith Realty')
+
 @section('content')
-  <h1>Home!</h1>
+  @include('components.hero')
 @endsection
