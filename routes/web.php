@@ -13,8 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Home Page
 Route::get('/', function () {
+    return view('welcome');
+});
+
+// Home Page
+Route::get('/home', function () {
     return view('pages/home');
 });
 // Single listing 
@@ -27,11 +31,11 @@ Route::get('/{property_type}/{listing_type}/{city}', function () {
 });
 
 // User Login
-Route::get('/login', function () {
+Route::get('/home/login', function () {
     return view('pages/login');
 });
 // User Register
-Route::get('/register', function () {
+Route::get('/home/register', function () {
     return view('pages/register');
 });
 // User Saved Listings
@@ -42,3 +46,9 @@ Route::get('/account/saved', function () {
 Route::get('/account/show-status', function () {
     return view('pages/show-status');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
