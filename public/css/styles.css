@@ -7329,3 +7329,9 @@ body {
   width: 100%;
   margin-bottom: 10px;
 }
+
+.error-sub-text {
+  padding: 10px 0 0;
+  color: red;
+  font-size: 0.8rem;
+}
