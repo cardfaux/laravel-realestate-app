@@ -14,13 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-// Home Page
-Route::get('/home', function () {
     return view('pages/home');
 });
+
+
 // Single listing 
 Route::get('/listing/{slug}/{id}', function () {
     return view('pages/single-listing');
@@ -28,27 +25,21 @@ Route::get('/listing/{slug}/{id}', function () {
 // Show All Listings
 Route::get('/{property_type}/{listing_type}/{city}', function () {
     return view('pages/listings');
-});
+})->name('listings');
 
-// User Login
-Route::get('/home/login', function () {
-    return view('pages/login');
-});
-// User Register
-Route::get('/home/register', function () {
-    return view('pages/register');
-});
+
 // User Saved Listings
-Route::get('/account/saved', function () {
+Route::get('/account', function () {
     return view('pages/saved-listings');
-});
+})->name('account');
 // User Showing Status
-Route::get('/account/show-status', function () {
-    return view('pages/show-status');
-});
+Route::get('/admin', function () {
+    return view('admin/dashboard');
+})->name('admin-dashboard');
+// Admin Dashboard
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';

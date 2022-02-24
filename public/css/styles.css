@@ -6873,6 +6873,10 @@ body {
   color: #3366cc;
   text-decoration: none;
 }
+.header__account-link--anchor {
+  margin-right: 1.5rem;
+  text-decoration: none;
+}
 
 .hero {
   position: relative;

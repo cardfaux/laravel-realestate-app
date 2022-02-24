@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>@yield('page-title')</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
   <link rel="stylesheet" href="{{mix('/css/styles.css')}}">
 </head>
 <body>
@@ -21,9 +20,11 @@
         <div class="row">
           <div class="col-md-3">
             <div class="account__menu">
+              
+              <h3>Welcome Back, {{ Auth::user()->name }}</h3>
               <h2>Menu</h2>
-              <a href="/account/saved">Saved Listings</a>
-              <a href="/account/show-status">Listing Request Status</a>
+              <a href="{{route('account')}}">Saved Listings</a>
+              <a href="{{route('show-status')}}">Listing Request Status</a>
             </div>
           
           </div>
