@@ -29,7 +29,7 @@ Route::group([
 
 		Route::get('/create', [\App\Http\Controllers\Admin\ListingController::class, 'create'])->name('create');
 
-		// Route::get('/{id}/edit', [\App\Http\Controllers\Admin\ListingController::class, 'edit'])->name('edit');
+		Route::get('/{id}/edit', [\App\Http\Controllers\Admin\ListingController::class, 'edit'])->name('edit');
 	});
 });
 
