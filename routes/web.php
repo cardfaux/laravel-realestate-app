@@ -18,45 +18,51 @@ Route::group([
 	'as' => 'admin.'
 ], function() {
 	Route::get('/', function () {
-		return view('admin/dashboard');
+			return view('admin/dashboard');
 	})->name('dashboard');
 
 	Route::group([
-		'prefix' => 'listings',
-		'as' => 'listings.'
+			'prefix' => 'listings',
+			'as' => 'listings.'
 	], function(){
-		Route::get('/', [\App\Http\Controllers\Admin\ListingController::class, 'index'])->name('index');
+			Route::get('/', [\App\Http\Controllers\Admin\ListingController::class, 'index'])->name('index');
 
-		Route::get('/create', [\App\Http\Controllers\Admin\ListingController::class, 'create'])->name('create');
+			Route::get('/create', [\App\Http\Controllers\Admin\ListingController::class, 'create'])->name('create');
 
-		Route::post('/', [\App\Http\Controllers\Admin\ListingController::class, 'store'])->name('store');
+			Route::post('/', [\App\Http\Controllers\Admin\ListingController::class, 'store'])->name('store');
 
-		Route::get('/{id}/edit', [\App\Http\Controllers\Admin\ListingController::class, 'edit'])->name('edit');
+			Route::get('/{slug}/{id}/edit', [\App\Http\Controllers\Admin\ListingController::class, 'edit'])->name('edit');
 	});
 });
 
+
+
 Route::get('/', function () {
-  return view('pages/home');
+	return view('pages/home');
 });
 
 
 // Single listing 
 Route::get('/listing/{slug}/{id}', function () {
-  return view('pages/single-listing');
+	return view('pages/single-listing');
 });
 // Show All Listings
 Route::get('/{property_type}/{listing_type}/{city}', function () {
-  return view('pages/listings');
+	return view('pages/listings');
 })->name('listings');
 
 
 // User Saved Listings
 Route::get('/account', function () {
-  return view('pages/saved-listings');
+	return view('pages/saved-listings');
 })->name('account');
 // User Showing Status
 Route::get('/account/show-status', function () {
-  return view('pages/show-status');
+	return view('pages/show-status');
 })->name('show-status');
+
+
+
+
 
 require __DIR__.'/auth.php';

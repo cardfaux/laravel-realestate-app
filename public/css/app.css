@@ -672,6 +672,9 @@ select {
 .mt-3 {
   margin-top: 0.75rem;
 }
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
 .mt-2 {
   margin-top: 0.5rem;
 }
@@ -701,9 +704,6 @@ select {
 }
 .mt-1 {
   margin-top: 0.25rem;
-}
-.mb-3 {
-  margin-bottom: 0.75rem;
 }
 .block {
   display: block;
@@ -937,11 +937,11 @@ select {
 .p-2 {
   padding: 0.5rem;
 }
-.p-0 {
-  padding: 0px;
-}
 .p-20 {
   padding: 5rem;
+}
+.p-0 {
+  padding: 0px;
 }
 .p-10 {
   padding: 2.5rem;
