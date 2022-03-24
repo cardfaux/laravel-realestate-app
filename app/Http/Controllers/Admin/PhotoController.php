@@ -7,6 +7,7 @@ use App\Models\Photo;
 use App\Helper\Helper;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PhotoController extends Controller
 {
@@ -80,14 +81,23 @@ class PhotoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // public function destroy($slug, $id, $photo_id)
+    // {
+    //     $photo = Photo::find($photo_id);
+
+    //     // $this->authorize('delete', $photo);
+        
+    //     $photo->delete();
+
+    //     return redirect("/admin/listings/{$slug}/{$id}/photos")->with('success', 'Photo Has Been Deleted Successfully');
+    // }
     public function destroy($slug, $id, $photo_id)
     {
         $photo = Photo::find($photo_id);
-
+        $image_path = public_path().'/img' . '/' . $photo->name;
+        unlink($image_path);
         // $this->authorize('delete', $photo);
-        
         $photo->delete();
-
         return redirect("/admin/listings/{$slug}/{$id}/photos")->with('success', 'Photo Has Been Deleted Successfully');
     }
 
