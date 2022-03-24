@@ -24,7 +24,9 @@ class PhotoController extends Controller
         }
 
         return view('admin/listings/photos/index', [
-            'photos' => $photos
+            'photos' => $photos,
+            'slug' => $slug,
+            'id' => $id
         ]);
     }
 
@@ -49,7 +51,7 @@ class PhotoController extends Controller
         // $this->authorize('create', Listing::class);
 
         request()->validate([
-            'image' => 'required|image|mimes:jpg,png,jpeg',
+            'image' => 'required|image|mimes:jpg,png,jpeg,webp',
         ]);
 
         $newName = time() . '-' . $request->file('image')->getClientOriginalName();
@@ -63,6 +65,7 @@ class PhotoController extends Controller
         $photo->size = $size;
         $photo->user_id = auth()->user()->id;
         $photo->listing_id = $id;
+        $photo->featured = 0;
 
         $photo->save();
         
@@ -72,47 +75,46 @@ class PhotoController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($slug, $id, $photo_id)
     {
-        //
+        $photo = Photo::find($photo_id);
+
+        // $this->authorize('delete', $photo);
+        
+        $photo->delete();
+
+        return redirect("/admin/listings/{$slug}/{$id}/photos")->with('success', 'Photo Has Been Deleted Successfully');
+    }
+
+    public function featured($slug, $id, $photo_id)
+    {
+        $old_photo = Photo::where([
+            'listing_id' => $id,
+            'featured' => 1,
+        ])->first();
+
+        if($old_photo != null) {
+            $old_photo->featured = 0;
+            // $this->authorize('delete', $photo);
+            $old_photo->save();
+        }
+
+        $new_photo = Photo::where([
+            'listing_id' => $id,
+            'id' => $photo_id,
+        ])->first();
+
+        $new_photo->featured = 1;
+
+        // $this->authorize('delete', $photo);
+        
+        $new_photo->save();
+
+        return redirect("/admin/listings/{$slug}/{$id}/photos")->with('success', 'Featured Photo Has Been Updated Successfully');
     }
 }
